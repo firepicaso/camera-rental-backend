@@ -19,7 +19,7 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: postgres
-  password: sql
+  password: <%= ENV["CAMERA_RENTAL_DATABASE_PASSWORD"] %>
 
 development:
   <<: *default
@@ -83,5 +83,5 @@ production:
   <<: *default
   database: camera_rental_backend_production
   username: postgres
-  password: sql
+  password: <%= ENV["CAMERA_RENTAL_DATABASE_PASSWORD"] %>
 
