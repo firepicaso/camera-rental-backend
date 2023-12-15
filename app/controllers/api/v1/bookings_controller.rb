@@ -1,5 +1,5 @@
 class Api::V1::BookingsController < ApplicationController
-  before_action :set_booking, only: %i[ show update destroy ]
+  before_action :set_booking, only: %i[show update destroy]
 
   # GET /bookings
   # GET /bookings.json
@@ -9,8 +9,7 @@ class Api::V1::BookingsController < ApplicationController
 
   # GET /bookings/1
   # GET /bookings/1.json
-  def show
-  end
+  def show; end
 
   # POST /bookings
   # POST /bookings.json
@@ -41,13 +40,14 @@ class Api::V1::BookingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_booking
-      @booking = Booking.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def booking_params
-      params.require(:booking).permit(:camera_id, :user_id, :booking_date)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_booking
+    @booking = Booking.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def booking_params
+    params.require(:booking).permit(:camera_id, :user_id, :booking_date)
+  end
 end

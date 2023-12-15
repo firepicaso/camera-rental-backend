@@ -1,1 +1,1 @@
-json.partial! "cameras/camera", camera: @camera
+json.partial! 'cameras/camera', camera: @camera

@@ -1,1 +1,1 @@
-json.array! @cameras, partial: "cameras/camera", as: :camera
+json.array! @cameras, partial: 'cameras/camera', as: :camera

@@ -1,5 +1,5 @@
 class Api::V1::CamerasController < ApplicationController
-  before_action :set_camera, only: %i[ show update destroy ]
+  before_action :set_camera, only: %i[show update destroy]
 
   # GET /cameras
   # GET /cameras.json
@@ -9,8 +9,7 @@ class Api::V1::CamerasController < ApplicationController
 
   # GET /cameras/1
   # GET /cameras/1.json
-  def show
-  end
+  def show; end
 
   # POST /cameras
   # POST /cameras.json
@@ -41,13 +40,14 @@ class Api::V1::CamerasController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_camera
-      @camera = Camera.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def camera_params
-      params.require(:camera).permit(:name, :image, :price, :type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_camera
+    @camera = Camera.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def camera_params
+    params.require(:camera).permit(:name, :image, :price, :type)
+  end
 end
