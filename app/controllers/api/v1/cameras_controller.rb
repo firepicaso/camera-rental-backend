@@ -1,4 +1,4 @@
-class CamerasController < ApplicationController
+class Api::V1::CamerasController < ApplicationController
   before_action :set_camera, only: %i[ show update destroy ]
 
   # GET /cameras
