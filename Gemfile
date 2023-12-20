@@ -50,3 +50,5 @@ gem 'rubocop', '>= 1.0', '< 2.0'
 gem 'devise', '4.9.3'
 gem 'devise-jwt', '0.11.0'
 gem 'jsonapi-serializer'
+
+gem "rswag", "~> 2.13"
