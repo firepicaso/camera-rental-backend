@@ -34,7 +34,14 @@ RSpec.describe 'api/v1/users', type: :request do
         it 'returns a 201 response' do
           expect(response).to have_http_status(201)
         end
-
+ it 'returns the token in the response' do
+          json_response = JSON.parse(response.body)
+          expect(json_response).to include('token')
+        end
+      end
+      response '422', 'unprocessable entity' do
+        let(:user_params) { { username: nil, password: nil } }
+        run_test!
        
       end
     end
