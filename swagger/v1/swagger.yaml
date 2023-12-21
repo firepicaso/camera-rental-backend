@@ -1,4 +1,15 @@
-
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/users":
+    post:
+      summary: create user
+      parameters: []
+      responses:
+        '201':
           description: user created
         '422':
           description: unprocessable entity
