@@ -52,6 +52,6 @@ gem 'devise', '4.9.3'
 gem 'devise-jwt', '0.11.0'
 gem 'jsonapi-serializer'
 
-gem "rswag", "~> 2.13"
+gem 'rswag', '~> 2.13'
 
-gem "activesupport", "~> 7.1"
+gem 'activesupport', '~> 7.1'
