@@ -5,6 +5,7 @@ class Api::V1::CamerasController < ApplicationController
   # GET /cameras.json
   def index
     @cameras = Camera.all
+    render json: @cameras
   end
 
   # GET /cameras/1
@@ -17,7 +18,7 @@ class Api::V1::CamerasController < ApplicationController
     @camera = Camera.new(camera_params)
 
     if @camera.save
-      render :show, status: :created, location: @camera
+      render :show, status: :created
     else
       render json: @camera.errors, status: :unprocessable_entity
     end
@@ -27,7 +28,7 @@ class Api::V1::CamerasController < ApplicationController
   # PATCH/PUT /cameras/1.json
   def update
     if @camera.update(camera_params)
-      render :show, status: :ok, location: @camera
+      render :show, status: :ok
     else
       render json: @camera.errors, status: :unprocessable_entity
     end
