@@ -4,13 +4,15 @@ class Api::V1::CamerasController < ApplicationController
   # GET /cameras
   # GET /cameras.json
   def index
-    @cameras = Camera.all
-    render json: @cameras
+    @cameras = Camera.all.includes(:camera_images)
+    render json: @cameras, include: :camera_images
   end
 
   # GET /cameras/1
   # GET /cameras/1.json
-  def show; end
+  def show
+    render json: @camera, include: :camera_images
+  end
 
   # POST /cameras
   # POST /cameras.json
@@ -28,7 +30,7 @@ class Api::V1::CamerasController < ApplicationController
   # PATCH/PUT /cameras/1.json
   def update
     if @camera.update(camera_params)
-      render :show, status: :ok
+      render json: @camera, status: :ok
     else
       render json: @camera.errors, status: :unprocessable_entity
     end
@@ -49,6 +51,7 @@ class Api::V1::CamerasController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def camera_params
-    params.require(:camera).permit(:name, :image, :price, :type)
+    params.require(:camera).permit(:name, :image, :daily_price, :camera_type, :weekly_price, :two_week_price, :three_week_price, :four_week_price, :booked)
   end
+
 end
