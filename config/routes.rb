@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
-  
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: [:create]
-      resources :cameras, only: [:index, :show, :create, :destroy]
+      resources :cameras, only: [:index, :show, :create, :update, :destroy]
       resources :bookings, only: [:index, :create, :show, :destroy]
     end
   end

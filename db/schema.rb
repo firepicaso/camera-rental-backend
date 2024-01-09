@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_19_045739) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_08_182619) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,13 +24,26 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_19_045739) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
-  create_table "cameras", force: :cascade do |t|
-    t.string "name"
+  create_table "camera_images", force: :cascade do |t|
     t.string "image"
-    t.decimal "price"
-    t.string "type"
+    t.bigint "camera_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["camera_id"], name: "index_camera_images_on_camera_id"
+  end
+
+  create_table "cameras", force: :cascade do |t|
+    t.string "name"
+    t.decimal "daily_price"
+    t.string "camera_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "weekly_price", precision: 10, scale: 2
+    t.decimal "two_week_price", precision: 10, scale: 2
+    t.decimal "three_week_price", precision: 10, scale: 2
+    t.decimal "four_week_price", precision: 10, scale: 2
+    t.text "description"
+    t.boolean "booked"
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,4 +63,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_19_045739) do
 
   add_foreign_key "bookings", "cameras"
   add_foreign_key "bookings", "users"
+  add_foreign_key "camera_images", "cameras"
 end
