@@ -81,7 +81,12 @@ end
   # DELETE /cameras/1
   # DELETE /cameras/1.json
   def destroy
-    @camera.destroy!
+    @deleted_camera = camera.find(params[:id])
+    if @deleted_camera.destroy
+      render json: { success: 'camera deleted' }, status: :ok
+    else
+      render json: { error: 'something went wrong' }, status: :not_found
+    end
   end
 
   private
