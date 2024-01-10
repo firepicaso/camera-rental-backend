@@ -9,11 +9,11 @@
 #   end
 
 # Clear existing data to prevent duplicates
-CameraImage.destroy_all
+# CameraImage.destroy_all
 Camera.destroy_all
 
 # Method to create camera records with associated images
-def create_camera_with_images(name, daily_price, camera_type, weekly_price, two_week_price, three_week_price, four_week_price, description, image_urls)
+def create_camera_with_images(name, daily_price, camera_type, weekly_price, two_week_price, three_week_price, four_week_price, description)
   camera = Camera.create(
     name: name,
     daily_price: daily_price,
@@ -26,9 +26,6 @@ def create_camera_with_images(name, daily_price, camera_type, weekly_price, two_
     booked: false
   )
 
-  image_urls.each do |image_url|
-    camera.camera_images.create(image: image_url)
-  end
 end
 
 
@@ -42,7 +39,7 @@ create_camera_with_images(
   823.00,
   950.00,
   "Meet the Canon XF705, a superb camcorder perfect for capturing professional UHD HDR content...",
-  [
+  images: [
      'https://dhdqwix5dbmzs.cloudfront.net/products/HAC00-05590/images/large/24-xf705-hire-uk.png',
    'https://dhdqwix5dbmzs.cloudfront.net/products/HAC00-05590/images/large/22-xf705-hire-uk.png',
    'https://dhdqwix5dbmzs.cloudfront.net/products/HAC00-05590/images/large/23-xf705-hire-uk.png',
