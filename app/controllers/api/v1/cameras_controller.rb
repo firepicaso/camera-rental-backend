@@ -4,26 +4,25 @@ class Api::V1::CamerasController < ApplicationController
   # GET /cameras
   # GET /cameras.json
   def index
-  @cameras = Camera.with_attached_images.all
+    @cameras = Camera.with_attached_images.all
 
-  camera_data = @cameras.map do |camera|
-    {
-      id: camera.id,
-      name: camera.name,
-      daily_price: camera.daily_price,
-      description: camera.description,
-      images: camera.images.map do |image|
-        {
-          url: url_for(image),
-          base64: Base64.strict_encode64(image.download)
-        }
-      end
-    }
+    camera_data = @cameras.map do |camera|
+      {
+        id: camera.id,
+        name: camera.name,
+        daily_price: camera.daily_price,
+        description: camera.description,
+        images: camera.images.map do |image|
+          {
+            url: url_for(image),
+            base64: Base64.strict_encode64(image.download)
+          }
+        end
+      }
+    end
+
+    render json: camera_data
   end
-
-  render json: camera_data
-end
-
 
   # GET /cameras/1
   # GET /cameras/1.json
@@ -31,7 +30,7 @@ end
     render json: @camera.as_json(include: :images).merge(
       images: @camera.images.map do |image|
         {
-          url: url_for(image),
+          url: url_for(image)
 
         }
       end
@@ -50,13 +49,11 @@ end
     # Process image URLs
     image_urls = Array(params[:camera][:image_urls])
     image_urls.each do |image_url|
-      begin
-        downloaded_image = URI.open(image_url)
-        filename = File.basename(image_url)
-        @camera.images.attach(io: downloaded_image, filename: filename)
-      rescue StandardError => e
-        puts "Error attaching image: #{e.message}"
-      end
+      downloaded_image = URI.open(image_url)
+      filename = File.basename(image_url)
+      @camera.images.attach(io: downloaded_image, filename:)
+    rescue StandardError => e
+      puts "Error attaching image: #{e.message}"
     end
 
     if @camera.save
@@ -65,8 +62,6 @@ end
       render json: @camera.errors, status: :unprocessable_entity
     end
   end
-
-
 
   # PATCH/PUT /cameras/1
   # PATCH/PUT /cameras/1.json
