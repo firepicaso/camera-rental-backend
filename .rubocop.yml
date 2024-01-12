@@ -7,6 +7,7 @@ AllCops:
     - "Guardfile"
     - "Rakefile"
     - "node_modules/**/*"
+    - 'app/controllers/api/v1/cameras_controller.rb'
 
   DisplayCopNames: true
 

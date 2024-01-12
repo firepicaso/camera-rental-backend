@@ -17,7 +17,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render :show, status: :created, location: @user
+      render json: @user, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class Api::V1::UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     if @user.update(user_params)
-      render :show, status: :ok, location: @user
+      render :show, status: :ok
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -48,6 +48,6 @@ class Api::V1::UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:username)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 end

@@ -4,7 +4,8 @@ class Api::V1::BookingsController < ApplicationController
   # GET /bookings
   # GET /bookings.json
   def index
-    @bookings = Booking.all
+    @booked_cameras = Camera.where(booked: true)
+    render json: @booked_cameras, include: :camera_images
   end
 
   # GET /bookings/1
