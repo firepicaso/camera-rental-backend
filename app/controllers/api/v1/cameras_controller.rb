@@ -46,6 +46,7 @@ class Api::V1::CamerasController < ApplicationController
     images = Array(params[:camera][:images])
     @camera.images.attach(images) if images.any?
 
+
     # Process image URLs
     image_urls = Array(params[:camera][:image_urls])
     image_urls.each do |image_url|
