@@ -67,10 +67,11 @@ class Api::V1::CamerasController < ApplicationController
   # PATCH/PUT /cameras/1
   # PATCH/PUT /cameras/1.json
   def update
+    @camera = Camera.find(params[:id])
     if @camera.update(camera_params)
       render json: @camera, status: :ok
     else
-      render json: @camera.errors, status: :unprocessable_entity
+      render json: { errors: @camera.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
